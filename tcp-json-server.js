@@ -45,5 +45,7 @@ server.on('connection', function(sock) {
         
         message_bus = message_cache.get(sock.remoteAddress);
         console.log("All the messages received from '" + sock.remoteAddress + "' are " + message_bus.toString());
+        
+        message_cache.delete(sock.remoteAddress);
     });
 });
