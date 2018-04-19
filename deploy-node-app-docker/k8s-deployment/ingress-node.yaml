@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: jwu-notebook
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: web.jwu-nodeserver.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: jwu-node-web-service
+          servicePort: 8080

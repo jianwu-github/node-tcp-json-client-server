@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jwu-node-web-app
+  namespace: jwu-notebook
+  labels:
+    jwu-app: jwu-node-web-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      jwu-app: jwu-node-web-app
+  template:
+    metadata:
+      labels:
+        jwu-app: jwu-node-web-app
+    spec:
+      containers:
+      - name: jwu-node-web-app
+        image: jwu-node-web-app
+        ports:
+        - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jwu-node-web-service
+  namespace: jwu-notebook
+  labels:
+    jwu-service: jwu-node-web-service
+spec:
+  selector:
+    jwu-app: jwu-node-web-app  
+  ports:
+  - name: jwu-node-web-port
+    port: 8080
+    targetPort: 8080
